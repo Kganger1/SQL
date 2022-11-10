@@ -1,7 +1,8 @@
 --Create table about the people and what they do
 
+Below I put together two tables. One for the authors and their age. Another for their books that are a part of a series.
+
 CREATE TABLE authors (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER);
-CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, authors_id INTEGER, title TEXT);
 
 INSERT INTO authors (name, age) VALUES ('cate tiernan', 61);
 INSERT INTO authors (name, age) VALUES ('j.k rowling', 57);
@@ -9,6 +10,8 @@ INSERT INTO authors (name, age) VALUES ('p.c cast', 62);
 INSERT INTO authors (name, age) VALUES ('kerrelyn sparks', 67);
 INSERT INTO authors (name, age) VALUES ('nora roberts', 72);
 
+
+CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, authors_id INTEGER, title TEXT);
 
 INSERT INTO books (authors_id, title) VALUES (5, 'dark witch');
 INSERT INTO books (authors_id, title) VALUES (5, 'shadow spell');
@@ -68,9 +71,21 @@ INSERT INTO books (authors_id, title) VALUES (1, 'reckoning');
 INSERT INTO books (authors_id, title) VALUES (1, 'full circle');
 INSERT INTO books (authors_id, title) VALUES (1, 'nights child');
 
+
+--which authors are over the age of 65? What books did they write?
 SELECT authors.name, authors.age, books.title
 FROM authors
 JOIN books
 ON authors.id = books.authors_id
 WHERE age > 65
 ORDER BY age;
+
+
+--How many books in each series?
+SELECT authors.name, COUNT(books.title) as 'total boooks'
+FROM books
+LEFT JOIN authors
+ON authors.id = books.authors_id
+GROUP BY authors.name;
+
+-- Which author has the longest series?
