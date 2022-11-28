@@ -47,3 +47,15 @@ SELECT Product, SUM(Quantity)
 FROM BIT_DB.FebSales
 where location like '%los Angeles%'
 Group BY Product;
+
+#9. How many of each type of headphone were sold in February?
+SELECT distinct Product, SUM(Quantity)
+FROM BIT_DB.FebSales
+WHERE Product LIKE '%headphone%'
+GROUP BY Product;
+
+#10. What was the average amount spent per account in February?
+select avg(price*Quantity)
+From BIT_DB.FebSales Feb
+left join BIT_DB.customers Cust
+on Feb.orderID=Cust.order_id;
