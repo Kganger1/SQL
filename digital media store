@@ -79,3 +79,13 @@
   on m.MediaTypeId=t.MediaTypeId
   join chinook.genres g
   on g.GenreId=t.GenreId
+
+13. Show the total sales made by each sales agent.
+  SELECT round(SUM(i.total),2) as SALES, e.FirstName, e.LastName
+  From chinook.invoices i
+  join chinook.customers c
+  on c.CustomerId=i.CustomerId
+  join chinook.employees e
+  on e.EmployeeId=c.SupportRepId
+  Where e.Title = 'Sales Support Agent'
+  group by e.FirstName
