@@ -61,4 +61,21 @@
   Order by ii.InvoiceLineId Asc;
   
 11. Write a query that includes the purchased track name AND artist name with each invoice line ID.
+  Select a.Name as artist, t.Name, ii.InvoiceLineId
+  From chinook.invoice_items ii
+  LEft JOIN chinook.tracks t
+  On ii.TrackId=t.TrackId
+  inner join chinook.albums al
+  on al.AlbumId=t.AlbumId
+  left join chinook.artists a
+  on al.ArtistId=a.ArtistId;
   
+12. Provide a query that shows all the Tracks, and include the Album name, Media type, and Genre.
+  SELECT t.Name, a.Title, m.Name as 'Media_Types', g.name
+  FROM chinook.tracks t
+  join chinook.albums a
+  on t.AlbumId=a.AlbumId
+  join chinook.media_types m
+  on m.MediaTypeId=t.MediaTypeId
+  join chinook.genres g
+  on g.GenreId=t.GenreId
