@@ -89,3 +89,16 @@
   on e.EmployeeId=c.SupportRepId
   Where e.Title = 'Sales Support Agent'
   group by e.FirstName
+
+14. Which sales agent made the most dollars in sales in 2009?
+  SELECT emp.FirstName, emp.LastName,
+  ROUND(SUM(Inv.Total), 2) as Sales 
+  FROM chinook.Employees emp
+  JOIN chinook.Customers cust 
+  ON cust.SupportRepId = emp.EmployeeId
+  JOIN chinook.Invoices Inv 
+  ON Inv.CustomerId = cust.CustomerId
+  WHERE emp.Title = 'Sales Support Agent' 
+  AND Inv.InvoiceDate Between '2009-01-01' AND '2009-12-31' 
+  GROUP BY emp.FirstName
+  ORDER BY (round(sum(Inv.Total), 2))  DESC LIMIT 1;
