@@ -1,4 +1,4 @@
-## I creat my table i used 
+## I created my table I used 
 
 CREATE TABLE IF NOT EXISTS public.books
 (
